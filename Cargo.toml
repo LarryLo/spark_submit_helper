@@ -1,0 +1,7 @@
+[package]
+name = "spark_submit_helper"
+version = "0.1.0"
+authors = ["Larry <larry.lo1025@gmail.com>"]
+
+[dependencies]
+getopts = "0.2"

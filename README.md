@@ -3,8 +3,13 @@ A simple program which submit solution to test the Spark Competition in Taiwan
 
 * Pre-install
   * Rust ~1.17.0
-  * Code-Fight [https://github.com/TaiwanSparkUserGroup/Code-Fight]
   
+* Init Script
+  ```
+  # The script is used to help make needed directories and clone Code-Fight
+  $ spark_submit_helper/bin/init.sh
+  ```
+
 * Build Code
   ```
   $ cd spark_submit_helper/src

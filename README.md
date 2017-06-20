@@ -1,5 +1,5 @@
 # spark_submit_helper
-A simple program which submit solution to test the Spark Competition in Taiwan 
+A simple program, which submit the solution of subject, to test the Spark Competition in Taiwan.
 
 * Pre-install
   * Rust ~1.17.0
@@ -8,6 +8,12 @@ A simple program which submit solution to test the Spark Competition in Taiwan
   ```
   # The script is used to help make needed directories and clone Code-Fight
   $ spark_submit_helper/bin/init.sh
+  ```
+
+* Install environment script
+  ```
+  # The script is used to install sbt
+  $ spark_submit_helper/bin/install_env.sh
   ```
 
 * Build Code

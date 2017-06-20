@@ -5,8 +5,10 @@ use std::{thread, time};
 use std::fs;
 use std::process::Command;
 
+mod lang_test;
+
 fn print_usage(program: &str, opts: Options) {
-    let brief = format!("Usage: {} -t [python|scala] -f FILE ", program);
+    let brief = format!("Usage: {}  ", program);
     print!("{}", opts.usage(&brief));
 }
 
@@ -18,8 +20,8 @@ fn main() {
 
     let mut opts = Options::new();
     opts.optflag("h", "help", "print this help menu");
-    opts.reqopt("l", "language", "select your language.", "[ python | scala ]");
-    opts.reqopt("s", "subject", "set subject name to submit", "e.g. word_count");
+    opts.reqopt("l", "language", "(required) select your language.", "[ python | scala ]");
+    opts.reqopt("s", "subject", "(required) set subject name to submit", "e.g. word_count");
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => { m }
         Err(f) => { print_usage(&program, opts); panic!(f.to_string()) }
@@ -38,19 +40,9 @@ fn main() {
 
                     match matches.opt_str("l") {
                         Some(language) => {
-                            let from = format!("/home/{}/{}/{}/{}", &user, &competition_name, language, subject);
-                            let to = format!("{}/{}/{}/{}/{}", &test_prefix_loc, &user, &competition_name, language, subject);
-                            println!("from => {}, to => {}", &from, &to);
-                                
-                            fs::copy(&from, &to);
 
-                            Command::new("nosetests")
-                                    .arg(&to)
-                                    .spawn()
-                                    .expect("cat error to start");
-                        
-                            let sleep_time = time::Duration::new(10, 0);;
-                            thread::sleep(sleep_time);
+                           lang_test::run_spark_test(&language, &user, &subject); 
+
                         },
                         None => {
                             println!("No such language");

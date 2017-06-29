@@ -33,7 +33,7 @@ impl Lang for Python {
                .output()
                .expect("cat error to start");
     
-        println!(&result);
+        println!("result: {:?}", &result);
         //let sleep_time = time::Duration::new(10, 0);;
         //thread::sleep(sleep_time);
     }

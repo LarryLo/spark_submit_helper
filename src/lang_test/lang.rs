@@ -1,6 +1,8 @@
 use std::{thread, time};
 use std::fs;
 use std::process::Command;
+use std::path::Path;
+use std::env;
 
 pub struct Python {
     user: String,
@@ -50,13 +52,15 @@ impl Lang for Scala {
         println!("from => {}, to => {}", &from, &to);
 
         fs::copy(&from, &to);
-        //Command::new("nosetests")
-        //       .arg(&to)
-        //       .spawn()
-        //       .expect("cat error to start");
+        
+        let path = Path::new(&to);
+        env::set_current_dir(&path).is_ok();
+
+        let result = Command::new("sbt")
+               .arg("test")
+               .output()
+               .expect("cat error to start");
     
-        let sleep_time = time::Duration::new(10, 0);;
-        thread::sleep(sleep_time);
-    
+        println!("result: {:?}", &result);
     }
 }

@@ -5,3 +5,6 @@ authors = ["Larry <larry.lo1025@gmail.com>"]
 
 [dependencies]
 getopts = "0.2"
+iron = "0.5.*"
+rustc-serialize = "*"
+router = "*"

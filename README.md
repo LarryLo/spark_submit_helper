@@ -1,8 +1,10 @@
 # spark_submit_helper
-A simple program, which submit the solution of subject, to test the Spark Competition in Taiwan.
+A simple program, which submit the solution of subject, to test spark program at the Spark Competition in Taiwan.
 
 * Pre-install
-  * Rust ~1.17.0
+  ```
+  curl https://sh.rustup.rs -sSf | sh
+  ```
   
 * Init Script
   ```
@@ -24,6 +26,11 @@ A simple program, which submit the solution of subject, to test the Spark Compet
   
 * How to use
   ```
+  # Server Side
   $ cp spark_submit_helper/target/debug/spark_submit_helper ~/
-  $ spark_submit_helper -l python -s word_count
+  $ ./spark_submit_helper
+  
+  
+  # Client Side
+  $ curl -XPOST -d '{"user":"larry","language":"python","subject":"word_count","solution":"ccc"}' localhost:3000/submit
   ```

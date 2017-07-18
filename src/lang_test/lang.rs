@@ -37,14 +37,8 @@ impl Lang for Python {
                .output()
                .expect("cat error to start");
     
-        let s = match String::from_utf8(result.stdout) {
-            Ok(v) => v,
-            Err(e) => panic!("Invalid UTF-8 sequence: {}", e),
-        };
-        s
-        //println!("result: {:?}", &result);
-        //let sleep_time = time::Duration::new(10, 0);;
-        //thread::sleep(sleep_time);
+        println!("result: {:?}", &result);
+        format!("{:?}", &result)
     }
 }
 
@@ -68,11 +62,7 @@ impl Lang for Scala {
                .output()
                .expect("cat error to start");
     
-        let s = match String::from_utf8(result.stdout) {
-            Ok(v) => v,
-            Err(e) => panic!("Invalid UTF-8 sequence: {}", e),
-        };
-        s
-        //println!("result: {:?}", &result);
+        println!("result: {:?}", &result);
+        format!("{:?}", &result)
     }
 }

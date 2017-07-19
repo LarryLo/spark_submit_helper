@@ -32,5 +32,5 @@ A simple program, which submit the solution of subject, to test spark program at
   
   
   # Client Side
-  $ curl -XPOST -d '{"user":"larry","language":"python","subject":"word_count","solution":"ccc"}' localhost:3000/submit
+  $ curl -XPOST -d '{"user":"larry", "language":"python", "subject":"word_count", "solution":"def answer(data):\n    result = data.flatMap(lambda x: x.split(\" \")).map(lambda x: (x, 1)).reduceByKey(lambda x, y: x + y).sortBy(lambda x : x[0]).sortBy(lambda x: x[1],  ascending=False).collect()\n    return result"}'  localhost:3000/submit
   ```

@@ -22,10 +22,6 @@ struct ResponsePayload {
     responseMessage: String
 }
 
-use std::env;
-use std::{thread, time};
-use std::fs;
-use std::process::Command;
 
 mod lang_test;
 
@@ -48,7 +44,7 @@ fn main() {
 
         let body: RequestPayload = json::decode(&body).unwrap();
 
-        let responseMsg = lang_test::run_spark_test(&body.language, &body.user, &body.subject); 
+        let responseMsg = lang_test::run_spark_test(&body.language, &body.user, &body.subject, &body.solution); 
 
         let message = ResponsePayload { responseCode: 0, responseMessage: responseMsg };
         let payload = json::encode(&message).unwrap();

@@ -1,4 +1,5 @@
 mod lang;
+pub mod parser;
 
 pub fn run_spark_test(language: &str, user: &str, subject: &str, solution: &str) -> String {
     match language {

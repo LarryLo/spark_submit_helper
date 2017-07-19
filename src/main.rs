@@ -8,6 +8,8 @@ use router::Router;
 use rustc_serialize::json;
 use std::io::Read;
 
+mod lang_test;
+
 #[derive(RustcEncodable, RustcDecodable)]
 struct RequestPayload {
     user: String,
@@ -19,11 +21,9 @@ struct RequestPayload {
 #[derive(RustcEncodable, RustcDecodable)]
 struct ResponsePayload {
     responseCode: i8,
-    responseMessage: String
+    responseMessage: String,
+    metrics: Option<lang_test::parser::ResponseMetrics>
 }
-
-
-mod lang_test;
 
 fn main() {
 
@@ -33,7 +33,7 @@ fn main() {
     router.post("/submit", submit, "submit");
 
     fn ping(_: &mut Request) -> IronResult<Response> {
-        let message = ResponsePayload { responseCode: 0, responseMessage: "pong".to_string() }; 
+        let message = ResponsePayload { responseCode: 0, responseMessage: "pong".to_string(), metrics: None }; 
         let payload = json::encode(&message).unwrap();
         Ok(Response::with((status::Ok, payload)))
     }
@@ -46,7 +46,7 @@ fn main() {
 
         let responseMsg = lang_test::run_spark_test(&body.language, &body.user, &body.subject, &body.solution); 
 
-        let message = ResponsePayload { responseCode: 0, responseMessage: responseMsg };
+        let message = ResponsePayload { responseCode: 0, responseMessage: responseMsg, metrics: None };
         let payload = json::encode(&message).unwrap();
         
 

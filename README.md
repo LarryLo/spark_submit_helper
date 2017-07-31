@@ -34,3 +34,12 @@ A simple program, which submit the solution of subject, to test spark program at
   # Client Side
   $ curl -XPOST -d '{"user":"larry", "language":"python", "subject":"word_count", "solution":"def answer(data):\n    result = data.flatMap(lambda x: x.split(\" \")).map(lambda x: (x, 1)).reduceByKey(lambda x, y: x + y).sortBy(lambda x : x[0]).sortBy(lambda x: x[1],  ascending=False).collect()\n    return result"}'  localhost:3000/submit
   ```
+
+* Response
+```
+  # Success
+  {"responseCode":0,"responseMessage":"pass","metrics":{"total":3,"error":0,"success":3}}
+  
+  # Fail
+  {"responseCode":1,"responseMessage":"fail","metrics":{"total":3,"error":2,"success":0}}
+```

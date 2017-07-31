@@ -7,7 +7,6 @@ use std::path::Path;
 use std::env;
 use std::string::String;
 
-
 pub struct Python {
     user: String,
     subject: String,
@@ -47,7 +46,7 @@ impl Lang for Python {
                .output()
                .expect("cat error to start");
     
-        println!("result: {:?}", &result);
+    //    println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }

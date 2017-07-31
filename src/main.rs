@@ -46,9 +46,12 @@ fn main() {
 
         let responseMsg = lang_test::run_spark_test(&body.language, &body.user, &body.subject, &body.solution); 
 
-        let message = ResponsePayload { responseCode: 0, responseMessage: responseMsg, metrics: None };
+        let message = match responseMsg.error {
+            // success
+            0 => ResponsePayload { responseCode: 0, responseMessage: "pass".to_string(), metrics: Some(responseMsg) },
+            _ => ResponsePayload { responseCode: 1, responseMessage: "fail".to_string(), metrics: Some(responseMsg) }
+        };
         let payload = json::encode(&message).unwrap();
-        
 
         Ok(Response::with((status::Ok, payload)))
     }

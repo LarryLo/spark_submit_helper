@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Larry <larry.lo1025@gmail.com>"]
 
 [dependencies]
-getopts = "0.2"
 iron = "0.5.*"
 rustc-serialize = "*"
 router = "*"
+regex = "0.2"

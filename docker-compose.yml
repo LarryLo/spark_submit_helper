@@ -1,0 +1,9 @@
+version: '2'
+services:
+  spark_submit_helper:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - "/var/log/spark_submit_helper:/var/log/spark_submit_helper"        
+      - "/test:/test"  

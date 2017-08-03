@@ -42,4 +42,7 @@ A simple program, which submit the solution of subject, to test spark program at
   
   # Fail
   {"responseCode":1,"responseMessage":"fail","metrics":{"total":3,"error":2,"success":0}}
+  
+  # Syntax Error
+  {"responseCode":1,"responseMessage":"fail","metrics":{"total":0,"error":1,"success":0}}
 ```

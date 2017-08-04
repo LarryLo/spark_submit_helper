@@ -1,6 +1,5 @@
 extern crate regex;
 use self::regex::Regex;
-use self::regex::Captures;
 
 #[derive(RustcEncodable, RustcDecodable)]
 pub struct ResponseMetrics {
@@ -13,7 +12,6 @@ pub fn parse_py_rsp(text: &str) -> ResponseMetrics {
 
     let re_fail = Regex::new(r"Ran (\d) tests(.+|\n)=(\d)").unwrap(); 
     let re_success = Regex::new(r"Ran (\d) tests(.+|\n)(OK)").unwrap(); 
-    let mut cap: Captures;
 
     match re_fail.captures(text) {
         Some(cap) => {
@@ -30,7 +28,7 @@ pub fn parse_py_rsp(text: &str) -> ResponseMetrics {
                     ResponseMetrics { total: total, error: 0, success: total}
                 },
                 None => {
-                    ResponseMetrics { total: 0, error: 1, success: 0 }
+                    ResponseMetrics { total: 127, error: 127, success: 0 }
 
                 }
             }

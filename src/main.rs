@@ -20,8 +20,8 @@ struct RequestPayload {
 
 #[derive(RustcEncodable, RustcDecodable)]
 struct ResponsePayload {
-    responseCode: i8,
-    responseMessage: String,
+    response_code: i8,
+    response_message: String,
     metrics: Option<lang_test::parser::ResponseMetrics>
 }
 
@@ -33,7 +33,7 @@ fn main() {
     router.post("/submit", submit, "submit");
 
     fn ping(_: &mut Request) -> IronResult<Response> {
-        let message = ResponsePayload { responseCode: 0, responseMessage: "pong".to_string(), metrics: None }; 
+        let message = ResponsePayload { response_code: 0, response_message: "pong".to_string(), metrics: None }; 
         let payload = json::encode(&message).unwrap();
         Ok(Response::with((status::Ok, payload)))
     }
@@ -44,12 +44,15 @@ fn main() {
 
         let body: RequestPayload = json::decode(&body).unwrap();
 
-        let responseMsg = lang_test::run_spark_test(&body.language, &body.user, &body.subject, &body.solution); 
+        let response_msg = lang_test::run_spark_test(&body.language, &body.user, &body.subject, &body.solution); 
 
-        let message = match responseMsg.error {
+        let message = match response_msg.error {
             // success
-            0 => ResponsePayload { responseCode: 0, responseMessage: "pass".to_string(), metrics: Some(responseMsg) },
-            _ => ResponsePayload { responseCode: 1, responseMessage: "fail".to_string(), metrics: Some(responseMsg) }
+            0 => ResponsePayload { response_code: 0, response_message: "pass".to_string(), metrics: Some(response_msg) },
+            // syntax error
+            127 => ResponsePayload { response_code: 1, response_message: "syntax error".to_string(), metrics: Some(response_msg) },
+            // test case failed
+            _ => ResponsePayload { response_code: 2, response_message: "fail".to_string(), metrics: Some(response_msg) }
         };
         let payload = json::encode(&message).unwrap();
 

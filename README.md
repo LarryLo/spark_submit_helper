@@ -36,13 +36,13 @@ A simple program, which submit the solution of subject, to test spark program at
   ```
 
 * Response
-```
+  ```
   # Success
-  {"responseCode":0,"responseMessage":"pass","metrics":{"total":3,"error":0,"success":3}}
-  
-  # Fail
-  {"responseCode":1,"responseMessage":"fail","metrics":{"total":3,"error":2,"success":0}}
+  {"response_code":0,"response_message":"pass","metrics":{"total":3,"error":0,"success":3}}
   
   # Syntax Error
-  {"responseCode":1,"responseMessage":"fail","metrics":{"total":0,"error":1,"success":0}}
-```
+  {"response_code":1,"response_message":"syntax error","metrics":{"total":127,"error":127,"success":0}}
+  
+  # Fail
+  {"response_code":2,"response_message":"fail","metrics":{"total":0,"error":1,"success":0}}
+  ```

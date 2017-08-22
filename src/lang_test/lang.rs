@@ -73,7 +73,7 @@ impl Lang for Scala {
                .output()
                .expect("cat error to start");
     
-        println!("result: {:?}", &result);
+        //println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }

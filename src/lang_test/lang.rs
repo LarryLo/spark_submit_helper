@@ -59,7 +59,6 @@ impl Lang for Scala {
         let from = format!("/home/{}/Code-Fight/scala/{}", self.user, self.subject);
         let to = format!("/test/{}/Code-Fight/scala/{}", self.user, self.subject);
         println!("from => {}, to => {}", &from, &to);
-
         
         // write solution to Solution.scala
         echo(solution, &Path::new(&format!("{}/src/main/scala/org/sparktw/codefight/Solution.scala", &to)));

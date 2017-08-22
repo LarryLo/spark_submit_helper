@@ -29,11 +29,28 @@ pub fn parse_py_rsp(text: &str) -> ResponseMetrics {
                 },
                 None => {
                     ResponseMetrics { total: 127, error: 127, success: 0 }
-
                 }
             }
         } 
     }
 }
 
+pub fn parse_scala_rsp(text: &str) -> ResponseMetrics {
+
+    let re_compile_success = Regex::new(r"Total (\d), Failed (\d), Errors (\d), Passed (\d)").unwrap();
+
+    match re_compile_success.captures(text) {
+        Some(cap) => {
+            let total: i8 = cap.get(1).unwrap().as_str().parse().unwrap();
+            let fail: i8 = cap.get(2).unwrap().as_str().parse().unwrap();
+            let error: i8 = cap.get(3).unwrap().as_str().parse().unwrap();
+            let success: i8 = cap.get(4).unwrap().as_str().parse().unwrap();
+            println!("total: {}, error: {}, success: {}", total, fail + error, success);
+            ResponseMetrics { total: total, error: fail + error, success: success }
+        },
+        None => {
+            ResponseMetrics { total: 127, error: 127, success: 0 }
+        }
+    } 
+}
 

@@ -28,7 +28,7 @@ A simple program, which submit the solution of subject, to test spark program at
   ```
   # Server Side
   $ cp spark_submit_helper/target/debug/spark_submit_helper ~/
-  $ ./spark_submit_helper
+  $ /bin/bash -c './spark_submit_helper > /tmp/spark_submit_helper.log 2>&1 &'
   
   
   # Client Side

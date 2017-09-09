@@ -32,20 +32,21 @@ impl Lang for Python {
     } 
 
     fn run_test(&self, solution: &str) -> String {
-        let from = format!("/home/{}/Code-Fight/python/{}", self.user, self.subject);
         let to = format!("/test/{}/Code-Fight/python/{}", self.user, self.subject);
-        println!("from => {}, to => {}", &from, &to);
+        println!("language => python, to => {}", &to);
 
         // write solution to solution.py
         echo(solution, &Path::new(&format!("{}/solution.py", &to)));
 
         // run test
-        let result = Command::new("nosetests")
+        let result = 
+            Command::new("nosetests")
                .arg(&to)
                .output()
+               .ok()
                .expect("cat error to start");
     
-    //    println!("result: {:?}", &result);
+//        println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }
@@ -56,24 +57,24 @@ impl Lang for Scala {
     } 
 
     fn run_test(&self, solution: &str) -> String {
-        let from = format!("/home/{}/Code-Fight/scala/{}", self.user, self.subject);
         let to = format!("/test/{}/Code-Fight/scala/{}", self.user, self.subject);
-        println!("from => {}, to => {}", &from, &to);
+        println!("language => scala, to => {}", &to);
         
         // write solution to Solution.scala
         echo(solution, &Path::new(&format!("{}/src/main/scala/org/sparktw/codefight/Solution.scala", &to)));
+        let path = Path::new(&to);
 
         // change location to subject
-        let path = Path::new(&to);
-        env::set_current_dir(&path).is_ok();
-
         // run test
-        let result = Command::new("sbt")
+        let result = 
+            Command::new("/usr/bin/sbt")
+               .current_dir(&path)
                .arg("test")
                .output()
+               .ok()
                .expect("cat error to start");
     
-        //println!("result: {:?}", &result);
+//        println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }

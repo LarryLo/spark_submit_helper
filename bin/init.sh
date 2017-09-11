@@ -1,7 +1,6 @@
 #!/bin/bash 
-mkdir ~/Code-Fight
-git clone https://github.com/bryanyang0528/Code-Fight.git ~/Code-Fight
+set -e
 
-sudo mkdir -m 777 /test
-mkdir /test/$USER
-cp -rf ~/Code-Fight /test/$USER/
+sudo mkdir -p /test/source/Code-Fight
+sudo chown larry:larry -R /test
+git clone https://github.com/bryanyang0528/Code-Fight.git /test/source/Code-Fight

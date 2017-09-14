@@ -33,7 +33,7 @@ A simple program, which submit the solution of subject, to test spark program at
   
   # Client Side
   ## For user creation
-  $ curl -XPOST -d '{"user":"GG"}' localhost:3000/create/user
+  $ curl -XPOST -d '{"user":"larry"}' localhost:3000/create/user
   
   ## For subjects test
   ### python version

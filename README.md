@@ -53,12 +53,13 @@ A simple program, which submit the solution of subject, to test spark program at
   {"response_code":2,"response_message":"Fail messages."}
   
   ## For subjects test
+  ### The timestamp filed is UTC format. 
   ### Success
-  {"response_code":0,"response_message":"pass","metrics":{"total":3,"error":0,"success":3}}
+  {"response_code":0,"response_message":"pass","metrics":{"total":3,"error":0,"success":3}, "timestamp":"2017-09-19 7:11:11"}
   
   ### Syntax Error
-  {"response_code":1,"response_message":"syntax error","metrics":{"total":127,"error":127,"success":0}}
+  {"response_code":1,"response_message":"syntax error","metrics":{"total":127,"error":127,"success":0}, "timestamp":"2017-09-19 7:11:11"}
   
   ### Fail
-  {"response_code":2,"response_message":"fail","metrics":{"total":0,"error":1,"success":0}}
+  {"response_code":2,"response_message":"fail","metrics":{"total":0,"error":1,"success":0}, "timestamp":"2017-09-19 7:11:11"}
   ```

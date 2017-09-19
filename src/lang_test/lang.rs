@@ -23,7 +23,7 @@ fn echo(solution: &str, path: &Path) -> io::Result<()> {
 
 pub trait Lang {
     fn new(user: String, subject: String) -> Self;
-    fn run_test(&self, solution: &str) -> String;
+    fn run_test(&self, solution: &str, version: i8) -> String;
 }
 
 impl Lang for Python {
@@ -31,22 +31,27 @@ impl Lang for Python {
         Python { user: user, subject: subject}
     } 
 
-    fn run_test(&self, solution: &str) -> String {
+    fn run_test(&self, solution: &str, version: i8) -> String {
         let to = format!("/test/{}/Code-Fight/python/{}", self.user, self.subject);
-        println!("language => python, to => {}", &to);
+        println!("language => python{}, to => {}", version, &to);
 
         // write solution to solution.py
         echo(solution, &Path::new(&format!("{}/solution.py", &to)));
 
+        let cmd = 
+            match version {
+                2 => "nosetests-2.7",
+                _ => "nosetests"
+            };
         // run test
         let result = 
-            Command::new("nosetests")
+            Command::new(&cmd)
                .arg(&to)
                .output()
                .ok()
                .expect("cat error to start");
     
-//        println!("result: {:?}", &result);
+        //println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }
@@ -56,7 +61,7 @@ impl Lang for Scala {
         Scala { user: user, subject: subject}
     } 
 
-    fn run_test(&self, solution: &str) -> String {
+    fn run_test(&self, solution: &str, version: i8) -> String {
         let to = format!("/test/{}/Code-Fight/scala/{}", self.user, self.subject);
         println!("language => scala, to => {}", &to);
         
@@ -67,14 +72,14 @@ impl Lang for Scala {
         // change location to subject
         // run test
         let result = 
-            Command::new("/usr/bin/sbt")
+            Command::new("sbt")
                .current_dir(&path)
                .arg("test")
                .output()
                .ok()
                .expect("cat error to start");
     
-//        println!("result: {:?}", &result);
+        //println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }

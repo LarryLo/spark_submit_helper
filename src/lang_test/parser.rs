@@ -17,14 +17,14 @@ pub fn parse_py_rsp(text: &str) -> ResponseMetrics {
         Some(cap) => {
             let total = cap.get(1).unwrap().as_str().parse().unwrap();
             let error = cap.get(3).unwrap().as_str().parse().unwrap();
-            println!("total: {}, error: {}, success: 0", total, error);
+//            println!("total: {}, error: {}, success: 0", total, error);
             ResponseMetrics { total: total, error: error, success: 0 }
         },
         None => {
             match re_success.captures(text) {
                 Some(cap) => {
                     let total = cap.get(1).unwrap().as_str().parse().unwrap(); 
-                    println!("total: {}, error: 0, success: {}", total, total);
+//                    println!("total: {}, error: 0, success: {}", total, total);
                     ResponseMetrics { total: total, error: 0, success: total}
                 },
                 None => {
@@ -45,7 +45,7 @@ pub fn parse_scala_rsp(text: &str) -> ResponseMetrics {
             let fail: i8 = cap.get(2).unwrap().as_str().parse().unwrap();
             let error: i8 = cap.get(3).unwrap().as_str().parse().unwrap();
             let success: i8 = cap.get(4).unwrap().as_str().parse().unwrap();
-            println!("total: {}, error: {}, success: {}", total, fail + error, success);
+//            println!("total: {}, error: {}, success: {}", total, fail + error, success);
             ResponseMetrics { total: total, error: fail + error, success: success }
         },
         None => {

@@ -36,9 +36,12 @@ A simple program, which submit the solution of subject, to test spark program at
   $ curl -XPOST -d '{"user":"larry"}' localhost:3000/create/user
   
   ## For subjects test
-  ### python version
-  $ curl -XPOST -d '{"user":"larry", "language":"python", "subject":"word_count", "solution":"def answer(data):\n    result = data.flatMap(lambda x: x.split(\" \")).map(lambda x: (x, 1)).reduceByKey(lambda x, y: x + y).sortBy(lambda x : x[0]).sortBy(lambda x: x[1],  ascending=False).collect()\n    return result"}'  localhost:3000/submit
+  ### python2 version
+  $ curl -XPOST -d '{"user":"larry", "language":"python2", "subject":"word_count", "solution":"def answer(data):\n    result = data.flatMap(lambda x: x.split(\" \")).map(lambda x: (x, 1)).reduceByKey(lambda x, y: x + y).sortBy(lambda x : x[0]).sortBy(lambda x: x[1],  ascending=False).collect()\n    return result"}'  localhost:3000/submit
   
+  ### python3 version
+  $ curl -XPOST -d '{"user":"larry", "language":"python3", "subject":"word_count", "solution":"def answer(data):\n    result = data.flatMap(lambda x: x.split(\" \")).map(lambda x: (x, 1)).reduceByKey(lambda x, y: x + y).sortBy(lambda x : x[0]).sortBy(lambda x: x[1],  ascending=False).collect()\n    return result"}'  localhost:3000/submit
+
   ### scala version
   $ curl -XPOST -d '{"user":"larry", "language":"scala", "subject":"word_count", "solution":"package org.sparktw.codefight\nimport org.apache.spark.rdd.RDD\nobject Solution {  def answer(data: RDD[String]): RDD[(String, Int)] = {    val result = data.flatMap(line => line.split(\" \")).map(word => (word, 1)).reduceByKey(_ + _).sortBy(x => x._1).sortBy(x => x._1, false)\n    result  }}"}'  localhost:3000/submit
   ```

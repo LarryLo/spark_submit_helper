@@ -51,7 +51,7 @@ impl Lang for Python {
                .ok()
                .expect("cat error to start");
     
-        //println!("result: {:?}", &result);
+        println!("user: {:?}, subject: {:?}, result: {:?}", self.user, self.subject, &result);
         format!("{:?}", &result)
     }
 }
@@ -79,7 +79,7 @@ impl Lang for Scala {
                .ok()
                .expect("cat error to start");
     
-        //println!("result: {:?}", &result);
+        println!("result: {:?}", &result);
         format!("{:?}", &result)
     }
 }

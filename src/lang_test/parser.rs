@@ -10,8 +10,8 @@ pub struct ResponseMetrics {
 
 pub fn parse_py_rsp(text: &str) -> ResponseMetrics {
 
-    let re_fail = Regex::new(r"Ran (\d) tests(.+|\n)=(\d)").unwrap(); 
-    let re_success = Regex::new(r"Ran (\d) tests(.+|\n)(OK)").unwrap(); 
+    let re_fail = Regex::new(r"Ran (\d) test(.+|\n)=(\d)").unwrap(); 
+    let re_success = Regex::new(r"Ran (\d) test(.+|\n)(OK)").unwrap(); 
 
     match re_fail.captures(text) {
         Some(cap) => {

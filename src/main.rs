@@ -90,7 +90,7 @@ fn main() {
         let message = match result.stderr.len() {
             // success
             0 => UserResponsePayload {response_code: 0, response_message: format!("Create {} subjects directories successfully.", &body.user), timestamp: now_utc}, 
-            _ => UserResponsePayload {response_code: 2, response_message: format!("{:?}", result.stderr), timestamp: now_utc}       
+            _ => UserResponsePayload {response_code: 2, response_message: format!("{:?}", String::from_utf8(result.stderr).unwrap()), timestamp: now_utc},       
         };
         let payload = json::encode(&message).unwrap();
         Ok(Response::with((status::Ok, payload)))

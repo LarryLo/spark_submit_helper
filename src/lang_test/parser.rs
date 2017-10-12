@@ -18,7 +18,7 @@ pub fn parse_py_rsp(text: &str) -> ResponseMetrics {
             let total = cap.get(1).unwrap().as_str().parse().unwrap();
             let error = cap.get(3).unwrap().as_str().parse().unwrap();
 //            println!("total: {}, error: {}, success: 0", total, error);
-            ResponseMetrics { total: total, error: error, success: 0 }
+            ResponseMetrics { total: total, error: error, success: total - error }
         },
         None => {
             match re_success.captures(text) {
